@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: fiap
+  name: product-service
+  labels:
+    app: product-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: product-service
+  template:
+    metadata:
+      labels:
+        app: product-service
+    spec:
+      containers:
+        - name: payment-service
+          image: mauricio1998/product-service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8082
+          volumeMounts:
+            - name: product-service
+              subPath: config.yaml
+              mountPath: /app/config.yaml
+      volumes:
+        - name: product-service
+          configMap:
+            name: "product-service"
