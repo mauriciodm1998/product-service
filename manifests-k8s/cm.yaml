@@ -2,7 +2,9 @@ apiVersion: v1
 data:
   config.yaml: |
     server:
-      port: 8082
+      port: 3002
+    db:
+      connectionString: mongodb://root:password@product-db.fiap.svc.cluster.local:27017/
 kind: ConfigMap
 metadata:
   labels:

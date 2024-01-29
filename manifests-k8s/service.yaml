@@ -8,8 +8,7 @@ spec:
   selector:
     app: product-service
   ports:
-    - protocol: TCP
-      port: 8082
-      targetPort: 8082
+    - port: 3002
+      targetPort: 3002
       name: rest
   type: ClusterIP
