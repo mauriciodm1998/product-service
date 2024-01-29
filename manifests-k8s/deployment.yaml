@@ -6,7 +6,7 @@ metadata:
   labels:
     app: product-service
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: product-service
@@ -20,11 +20,11 @@ spec:
           image: mauricio1998/product-service
           imagePullPolicy: Always
           ports:
-            - containerPort: 8082
+            - containerPort: 3002
           volumeMounts:
             - name: product-service
               subPath: config.yaml
-              mountPath: /app/config.yaml
+              mountPath: /go/app/config.yaml
       volumes:
         - name: product-service
           configMap:
