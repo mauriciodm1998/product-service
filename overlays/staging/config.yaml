@@ -1,0 +1,4 @@
+server:
+  port: 8081
+db:
+  connectionString: mongodb://root:password@product-db.fiap.svc.cluster.local:27017/
