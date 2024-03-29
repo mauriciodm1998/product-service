@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
 - ../../base
 
-namespace: hackaton
+namespace: tech-challenge
 
 configMapGenerator:
 - files:
@@ -15,8 +15,14 @@ configMapGenerator:
 patches: 
 - patch: |-
     - op: replace
-      path: /spec/ports/0/port
-      value: 8081
+      path: /spec/ports
+      value:
+        - targetPort: 8081
+          port: 8081
+          name: rest
+        - targetPort: 50051
+          port: 50051
+          name: grpc
   target:
     kind: Service
 
@@ -27,6 +33,12 @@ patches:
     - op: replace
       path: /spec/template/spec/containers/0/ports/0/containerPort
       value: 8081
+    - op: add
+      path: /spec/template/spec/containers/0/ports/1
+      value: 
+        containerPort: 50051
+        name: grpc
+        protocol: TCP
     - op: replace
       path: /spec/template/spec/containers/0/readinessProbe/httpGet/port
       value: 8081
